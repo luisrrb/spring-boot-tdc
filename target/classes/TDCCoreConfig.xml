@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+		<bean id="core-evento-padre" name="Evento padre"
+		class="mx.rod.tdc.entities.Evento">
+		<property name="monto" value="0"></property>
+		<property name="nota" value='""'></property>
+		<property name="lugar" value='""'></property>
+		<property name="fecha" value='""'></property>
+	</bean>
+	<bean id="core-gasto" name="Gastos"
+		class="mx.rod.tdc.entities.Gasto" parent="core-evento-padre">
+	</bean>
+	<bean id="core-evento-programado" name="Evento Programado"
+		class="mx.rod.tdc.entities.EventoProgramado">
+			<property name="numeroDeEventos"></property>
+			<property name="estaPagado"></property>
+			<property name="diasDeCobro"></property>
+			<property name="montoTotal"></property>
+			<property name="numeroDeEventosRestantes"></property>
+			<property name="montoPagadoAlPeriodo"></property>
+			<property name="montoRestanteAlPeriodo"></property>
+			<property name="fechaInialdeEvento"></property>
+			<property name="fechaDelSiguienteEvento"></property>
+			<property name="numeroDeEventosAlPeriodo"></property>
+	</bean>
+	<bean id="core-gasto-programado" name="Gasto programado"
+		class="mx.rod.tdc.entities.GastoProgramado"
+		parent="core-evento-programado">
+	</bean>
+	<bean id="core-pago-programado" name="Pago Programado"
+		class="mx.rod.tdc.entities.PagoProgramado"
+		parent="core-evento-programado">
+	</bean>
+	<bean id="core-dia" name="Dia" class="mx.rod.tdc.entities.Dia"
+		parent="core-tdc">
+	</bean>
+	<bean id="core-tdc" name="Core TDC" class="mx.rod.tdc.entities.TDC">
+		<property name="saldoAlCorte"></property>
+		<property name="tazaIneteresAnual"></property>
+		<property name="tazaInteresMensual"></property>
+		<property name="porcentajePagoMinimo"></property>
+		<property name="diaDeCorte"></property>
+		<property name="nombreTDC"></property>
+	</bean>
+	<bean id="core-periodo" name="Core Periodo"
+		class="mx.rod.tdc.entities.Periodo" parent="core-tdc">
+	</bean>
+	<bean id="tdc-env-config" name="tdc config"
+		class="mx.rod.tdc.core.config.TDCCoreConfig">
+		<property name="tdcURL" value='"/tdcs"'></property>
+	</bean>
+</beans>
